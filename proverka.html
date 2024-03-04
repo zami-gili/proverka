@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Форма и режим просмотра резюме</title>
+    <style>
+        .resume-form {
+            display: block;
+            margin-bottom: 20px;
+        }
+        .resume-view {
+            display: none;
+        }
+    </style>
+    <script>
+        // Функция для открытия списка резюме при переходе по пути "{адрес сайта}/all"
+        function openResumeList() {
+            var path = window.location.pathname;
+            if (path === '/all') {
+                var form = document.getElementById('resume-form');
+                var view = document.getElementById('resume-view');
+                
+                form.style.display = 'none';
+                view.style.display = 'block';
+            }
+        }
+
+        // Функция для показа результата в режиме просмотра
+        function showResume() {
+            var form = document.getElementById('resume-form');
+            var view = document.getElementById('resume-view');
+            
+            view.innerHTML = 'Имя: ' + form.name.value + '<br>' +
+                             'Возраст: ' + form.age.value + '<br>' +
+                             'Опыт работы: ' + form.experience.value;
+            form.style.display = 'none';
+            view.style.display = 'block';
+        }
+
+        // Вызываем функцию для проверки и открытия списка резюме при загрузке страницы
+        window.onload = openResumeList;
+    </script>
+</head>
+<body>
+    <div class="resume-form">
+        <h2>Форма заполнения резюме</h2>
+        <form id="resume-form">
+            <label for="name">Имя:</label>
+            <input type="text" name="name" required><br><br>
+
+            <label for="age">Возраст:</label>
+            <input type="number" id="age" name="age" required><br><br>
+
+            <label for="experience">Опыт работы:</label>
+            <textarea id="experience" name="experience" rows="4" required></textarea><br><br>
+
+            <input type="button" value="Подтвердить" onclick="showResume()">
+        </form>
+    </div>
+
+    <div class="resume-view" id="resume-view">
+        <h2>Просмотр резюме</h2>
+    </div>
+</body>
+</html>
